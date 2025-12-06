@@ -1,29 +1,66 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- DATA & STATE ---
     const products = [
-        // This is an example of how to add a manual note.
-        // To add more, just copy this entire block (from { to },) and paste it below.
-        { 
-            id: 'BEE University Paper', 
-            name: 'BEE University Paper', 
-            description: 'NEP 2024 BEE University Question Paper', 
-            pdfUrl: 'https://drive.google.com/file/d/1x8mXVCGFRZDX44Y5ytMEULlobZvhfHWu/preview' // Replace with your PDF link
-        },
-        // Example of a product with only 
         {
-            id: 'Maths-Notes-01',
-            name: 'Maths Notes',
-            description: 'Comprehensive notes covering algebra, geometry, and calculus topics for high school students.',
-            pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+            id: 'BEE-University-Paper',
+            name: 'Basic of Electronics Engg PYQ',
+            description: 'NEP 2024 BEE University Question Paper',
+            branch: 'IT & CSE',        // Common for all branches (change if needed)
+            year: '1st SEM',        // Set your actual year
+            pdfUrl: 'https://drive.google.com/file/d/1x8mXVCGFRZDX44Y5ytMEULlobZvhfHWu/preview'
+        },
+        // {
+        //     id: 'Maths-Notes-01',
+        //     name: 'Maths Notes',
+        //     description: 'Comprehensive notes covering algebra, geometry, and calculus topics for high school / 1st year students.',
+        //     branch: 'CSE',           // Example branch
+        //     year: '1st SEM',        // Change as needed
+        //     pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+        // },
+        {
+            id: 'Communication-Skills-University-Question-Paper',
+            name: 'Communication Skill PYQ',
+            description: 'NEP 2024 Communication Skill University Question Paper',
+            branch: 'IT & CSE',        // Common subject
+            year: '1st SEM',        // Set your actual year
+            pdfUrl: 'https://drive.google.com/file/d/1jJf2AW4cHbmbilLmQ0bbQW6vlJ10j3LP/preview'
+        },
+        {
+            id: 'Problem-Solving-using-C-University-Question-Paper',
+            name: 'Problem Solving using C PYQ',
+            description: 'NEP 2024 Problem Solving using C University Question Paper',
+            branch: 'IT & CSE',        // Common subject
+            year: '1st SEM',
+            pdfUrl: 'https://drive.google.com/file/d/1CFJAJ2PR1cuqcOBuJaq9EQgYyYf4XjuD/preview'
+        },
+        {
+            id: 'Maths-Applied-Algebra-University-Question-Paper',
+            name: 'Maths Applied Algebra PYQ',
+            description: 'NEP 2024 Maths Applied Algebra University Question Paper',
+            branch: 'IT & CSE',        // Common subject
+            year: '1st SEM',
+            pdfUrl: 'https://drive.google.com/file/d/1swatBfp9BE89g0SIEsFqmiqhab48WFY-/preview'
+        },
+        {
+            id: 'Essentials-of-Chemistry-University-Question-Paper',
+            name: 'Essentials of Chemistry PYQ',
+            description: 'NEP 2024 Essentials of Chemistry University Question Paper',
+            branch: 'IT & CSE',        // Common subject
+            year: '1st SEM',
+            pdfUrl: 'https://drive.google.com/file/d/1TFnQG7e7YPYSDKLLoSBSurhLdBL6Zils/preview'
         },
 
-        {
-            id: 'Communication Skills University Question Paper',
-            name: 'Communication Skill University Question Paper',
-            description: 'NEP 2024 Communication Skill University Question Paper',
-            pdfUrl: 'https://drive.google.com/file/d/1jJf2AW4cHbmbilLmQ0bbQW6vlJ10j3LP/preview'
-        }    
+        // 👉 Add more papers here:
+        // {
+        //     id: 'CSE-2nd-Year-DBMS-Paper',
+        //     name: 'DBMS University Question Paper',
+        //     description: 'CSE 2nd Year DBMS previous year question paper.',
+        //     branch: 'CSE',
+        //     year: '2nd Year',
+        //     pdfUrl: 'YOUR_DRIVE_OR_PDF_LINK'
+        // },
     ];
+
     let currentProduct = null;
 
     // --- DOM ELEMENTS ---
@@ -32,21 +69,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchBar = document.getElementById('searchBar');
     const noResultsDiv = document.getElementById('no-results');
 
+    // NEW: branch & year filters
+    const branchFilter = document.getElementById('branchFilter');
+    const yearFilter = document.getElementById('yearFilter');
+
+    const pdfViewer = document.getElementById('pdfViewer');
+    const viewerTitle = document.getElementById('viewerTitle');
+    const closeViewerButton = document.getElementById('closeViewerButton');
+
     // --- FUNCTIONS ---
 
-    function renderProducts(filter = '') {
+    function renderProducts() {
         productContainer.innerHTML = '';
-        const filteredProducts = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
-        noResultsDiv.style.display = filteredProducts.length === 0 ? 'block' : 'none';
+
+        const textQuery = (searchBar.value || '').toLowerCase();
+        const selectedBranch = branchFilter.value;
+        const selectedYear = yearFilter.value;
+
+        const filteredProducts = products.filter(p => {
+            const matchesBranch = !selectedBranch || p.branch === selectedBranch;
+            const matchesYear = !selectedYear || p.year === selectedYear;
+            const matchesText =
+                !textQuery ||
+                p.name.toLowerCase().includes(textQuery) ||
+                p.description.toLowerCase().includes(textQuery);
+
+            return matchesBranch && matchesYear && matchesText;
+        });
+
+        if (filteredProducts.length === 0) {
+            noResultsDiv.classList.remove('hidden');
+        } else {
+            noResultsDiv.classList.add('hidden');
+        }
+
         filteredProducts.forEach(product => {
             const card = document.createElement('div');
-            // UPDATED: Added card-top-border class for new styling
+            // Use your Tailwind + custom card-top-border style
             card.className = 'bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col card-top-border';
+
             card.innerHTML = `
                 <div class="p-6 flex-grow">
-                    <h3 class="text-xl font-bold mb-2">${product.name}</h3>
-                    <!-- UPDATED: Removed fixed height, added line-clamp to handle long text -->
-                    <p class="text-gray-600 mb-4 text-sm line-clamp-3">${product.description}</p>
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold">${product.name}</h3>
+                        <span class="text-xs px-2 py-1 rounded-full bg-indigo-50 text-indigo-700">
+                            ${product.branch} · ${product.year}
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-4 text-sm line-clamp-3">
+                        ${product.description}
+                    </p>
                 </div>
                 <div class="p-6 bg-gray-50 flex justify-end items-center">
                     <button data-product-id="${product.id}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded-lg transition duration-300 view-pdf-btn">
@@ -61,14 +133,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function openViewer(productId) {
         currentProduct = products.find(p => p.id === productId);
         if (currentProduct) {
-            document.getElementById('viewerTitle').textContent = currentProduct.name;
-            const pdfViewer = document.getElementById('pdfViewer');
+            viewerTitle.textContent = currentProduct.name;
             pdfViewer.src = currentProduct.pdfUrl;
-            viewerModal.style.display = 'flex';
+
+            // Show modal: remove hidden and ensure flex
+            viewerModal.classList.remove('hidden');
+            viewerModal.classList.add('flex');
         }
     }
 
-    // --- EVENT LISTENERS ---
+    function closeViewer() {
+        viewerModal.classList.add('hidden');
+        viewerModal.classList.remove('flex');
+        pdfViewer.src = 'about:blank';
+    }
+
+    // --- HELPERS ---
     const debounce = (fn, delay) => {
         let timeoutId;
         return (...args) => {
@@ -76,9 +156,17 @@ document.addEventListener('DOMContentLoaded', () => {
             timeoutId = setTimeout(() => fn(...args), delay);
         };
     };
-    
-    searchBar.addEventListener('input', debounce((e) => renderProducts(e.target.value), 300));
 
+    // --- EVENT LISTENERS ---
+
+    // Search typing
+    searchBar.addEventListener('input', debounce(() => renderProducts(), 200));
+
+    // NEW: Branch + Year change
+    branchFilter.addEventListener('change', () => renderProducts());
+    yearFilter.addEventListener('change', () => renderProducts());
+
+    // View PDF button click (event delegation)
     productContainer.addEventListener('click', (e) => {
         const button = e.target.closest('.view-pdf-btn');
         if (button) {
@@ -87,12 +175,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('closeViewerButton').addEventListener('click', () => {
-        viewerModal.style.display = 'none';
-        document.getElementById('pdfViewer').src = 'about:blank'; // Clear the viewer
+    // Close modal button
+    closeViewerButton.addEventListener('click', closeViewer);
+
+    // Close on backdrop click (clicking dark area)
+    viewerModal.addEventListener('click', (e) => {
+        if (e.target === viewerModal) {
+            closeViewer();
+        }
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeViewer();
+        }
     });
 
     // --- INITIALIZATION ---
     renderProducts();
 });
-
