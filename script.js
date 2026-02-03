@@ -9,14 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             year: '1st SEM',        // Set your actual year
             pdfUrl: 'https://drive.google.com/file/d/1x8mXVCGFRZDX44Y5ytMEULlobZvhfHWu/preview'
         },
-        // {
-        //     id: 'Maths-Notes-01',
-        //     name: 'Maths Notes',
-        //     description: 'Comprehensive notes covering algebra, geometry, and calculus topics for high school / 1st year students.',
-        //     branch: 'CSE',           // Example branch
-        //     year: '1st SEM',        // Change as needed
-        //     pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
-        // },
+      
         {
             id: 'Communication-Skills-University-Question-Paper',
             name: 'Communication Skill PYQ',
@@ -49,6 +42,54 @@ document.addEventListener('DOMContentLoaded', () => {
             year: '1st SEM',
             pdfUrl: 'https://drive.google.com/file/d/1TFnQG7e7YPYSDKLLoSBSurhLdBL6Zils/preview'
         },
+
+        // 2nd SEM PAPERS
+
+
+        {
+            id: 'Mathematical-Foundations-of-Computer-Science-University-Question-Paper',
+            name: 'Mathematical Foundations of Computer Science PYQ',
+            description: 'NEP 2024 Mathematical Foundations of Computer Science University Question Paper',
+            branch: 'IT & CSE',
+            year: '2nd SEM',
+            pdfUrl: 'https://drive.google.com/file/d/171tDtuvE4Sat2ziZEa65Q7fzvlYgrTtU/preview'
+        },
+        {
+            id: 'Essentials-of-Physics-University-Question-Paper',
+            name: 'Essentials of Physics PYQ',
+            description: 'NEP 2024 Essentials of Physics University Question Paper',
+            branch: 'IT & CSE',
+            year: '2nd SEM',
+            pdfUrl: 'https://drive.google.com/file/d/1Ab4QuevleI-MXkx9YOuQtKOFWJq618Pm/preview'
+        },
+        {
+            id: 'Consciousness-Studies-University-Question-Paper',
+            name: 'Consciousness Studies PYQ',
+            description: 'NEP 2024 Consciousness Studies University Question Paper',
+            branch: 'IT & CSE',
+            year: '2nd SEM',
+            pdfUrl: 'https://drive.google.com/file/d/11kTTNKxVkLA0wnyQqzTjX5E8sZW1yaPL/preview'
+        },
+        {
+            id: 'Python-Programming-University-Question-Paper',
+            name: 'Python Programming PYQ',
+            description: 'NEP 2024 Python Programming University Question Paper',
+            branch: 'IT & CSE',
+            year: '2nd SEM',
+            pdfUrl: 'https://drive.google.com/file/d/17rQH7Q1XJLuCV2eAOst_F1ZxDdmwPf1E/preview'
+        },
+        {
+            id: 'Computer-Architecture-and-Organization-University-Question-Paper',
+            name: 'Computer Architecture and Organization PYQ',
+            description: 'NEP 2024 Computer Architecture and Organization University Question Paper',
+            branch: 'IT & CSE',
+            year: '2nd SEM',
+            pdfUrl: 'https://drive.google.com/file/d/1hSpEfEq_-CwsQcoo6Ra2kx8-L6eZoqVR/preview'
+        },
+
+        // 3rd SEM PAPERS
+
+        {},
 
         // 👉 Add more papers here:
         // {
