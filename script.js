@@ -89,7 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3rd SEM PAPERS
 
-        {},
+        {
+            id: 'Object-oriented',
+        },
 
         // 👉 Add more papers here:
         // {
