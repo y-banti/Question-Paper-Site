@@ -94,10 +94,18 @@ header {
     background: #94a3b8;
 }
 
-/* Card Styles */
-.card-top-border {
-    border-top-width: 10px;
-    border-top-style: solid;
+/* Card Mixed Accent Border */
+.card-custom-border {
+    border-width: 2px !important;
+    /* side and bottom */
+    border-top-width: 8px !important;
+    /* Thick previous accent */
+    border-style: solid !important;
+    transition: transform 0.5s, border-top-width 0.3s, border-color 0.3s;
+}
+
+.card-custom-border:hover {
+    border-top-width: 12px !important;
 }
 
 /* Custom Select Styling */

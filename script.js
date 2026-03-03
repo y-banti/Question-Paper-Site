@@ -192,14 +192,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Define color mapping for semesters (Border, Text, and Hover Background)
         const semColorMap = {
-            '1st SEM': { border: 'border-indigo-600', text: 'text-indigo-600', hoverBg: 'hover:bg-indigo-600', light: 'bg-indigo-50' },
-            '2nd SEM': { border: 'border-emerald-600', text: 'text-emerald-600', hoverBg: 'hover:bg-emerald-600', light: 'bg-emerald-50' },
-            '3rd SEM': { border: 'border-amber-600', text: 'text-amber-600', hoverBg: 'hover:bg-amber-600', light: 'bg-amber-50' },
-            '4th SEM': { border: 'border-rose-600', text: 'text-rose-600', hoverBg: 'hover:bg-rose-600', light: 'bg-rose-50' },
-            '5th SEM': { border: 'border-fuchsia-600', text: 'text-fuchsia-600', hoverBg: 'hover:bg-fuchsia-600', light: 'bg-fuchsia-50' },
-            '6th SEM': { border: 'border-cyan-600', text: 'text-cyan-600', hoverBg: 'hover:bg-cyan-600', light: 'bg-cyan-50' },
-            '7th SEM': { border: 'border-orange-600', text: 'text-orange-600', hoverBg: 'hover:bg-orange-600', light: 'bg-orange-50' },
-            '8th SEM': { border: 'border-teal-600', text: 'text-teal-600', hoverBg: 'hover:bg-teal-600', light: 'bg-teal-50' }
+            '1st SEM': { border: 'border-indigo-600', text: 'text-indigo-600', hoverBg: 'hover:bg-indigo-600', light: 'bg-indigo-50', hoverBorder: 'hover:border-indigo-600', hoverText: 'hover:text-indigo-600' },
+            '2nd SEM': { border: 'border-emerald-600', text: 'text-emerald-600', hoverBg: 'hover:bg-emerald-600', light: 'bg-emerald-50', hoverBorder: 'hover:border-emerald-600', hoverText: 'hover:text-emerald-600' },
+            '3rd SEM': { border: 'border-amber-600', text: 'text-amber-600', hoverBg: 'hover:bg-amber-600', light: 'bg-amber-50', hoverBorder: 'hover:border-amber-600', hoverText: 'hover:text-amber-600' },
+            '4th SEM': { border: 'border-rose-600', text: 'text-rose-600', hoverBg: 'hover:bg-rose-600', light: 'bg-rose-50', hoverBorder: 'hover:border-rose-600', hoverText: 'hover:text-rose-600' },
+            '5th SEM': { border: 'border-fuchsia-600', text: 'text-fuchsia-600', hoverBg: 'hover:bg-fuchsia-600', light: 'bg-fuchsia-50', hoverBorder: 'hover:border-fuchsia-600', hoverText: 'hover:text-fuchsia-600' },
+            '6th SEM': { border: 'border-cyan-600', text: 'text-cyan-600', hoverBg: 'hover:bg-cyan-600', light: 'bg-cyan-50', hoverBorder: 'hover:border-cyan-600', hoverText: 'hover:text-cyan-600' },
+            '7th SEM': { border: 'border-orange-600', text: 'text-orange-600', hoverBg: 'hover:bg-orange-600', light: 'bg-orange-50', hoverBorder: 'hover:border-orange-600', hoverText: 'hover:text-orange-600' },
+            '8th SEM': { border: 'border-teal-600', text: 'text-teal-600', hoverBg: 'hover:bg-teal-600', light: 'bg-teal-50', hoverBorder: 'hover:border-teal-600', hoverText: 'hover:text-teal-600' }
         };
 
         filteredProducts.forEach((product, index) => {
@@ -210,9 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Staggered animation delay
             const delay = index * 0.08;
             card.style.animationDelay = `${delay}s`;
-            card.className = `bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden transform hover:-translate-y-3 transition-all duration-500 flex flex-col card-top-border animate-card ${semColors.border} border border-gray-100`;
+            card.className = `bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden transform hover:-translate-y-3 transition-all duration-500 flex flex-col card-custom-border animate-card group ${semColors.border}`;
 
-            const isNew = index < 3; // Just making the first few marked as new for visuals
+            const isNew = index < 0; // Just making the first few marked as new for visuals
 
             card.innerHTML = `
                 <div class="p-8 flex-grow relative">
@@ -221,12 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="inline-block px-3 py-1 rounded-xl ${semColors.light} ${semColors.text} text-[10px] font-black uppercase tracking-wider mb-4 border ${semColors.border} opacity-70">
                             ${product.year}
                         </span>
-                        <h3 class="text-2xl font-black text-gray-900 leading-tight group-hover:text-indigo-600 transition-colors">${product.name}</h3>
+                        <h3 class="text-2xl font-black text-gray-900 leading-tight ${semColors.hoverText} transition-colors">${product.name}</h3>
                     </div>
                     
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="flex -space-x-2">
-                           <div class="w-6 h-6 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-400">?</div>
+                        <div class="flex items-center">
+                           <div class="w-8 h-8 rounded-xl bg-slate-50 border-2 border-white flex items-center justify-center shadow-sm group-hover:bg-white transition-colors duration-300">
+                               <svg class="w-4 h-4 text-slate-400 ${semColors.hoverText} transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                           </div>
                         </div>
                         <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">${product.branch}</span>
                     </div>
@@ -237,11 +239,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="px-8 py-6 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center gap-4">
                     <!-- Download Icon Button -->
-                    <button data-download-url="${product.pdfUrl}" class="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-slate-200 text-slate-400 hover:border-indigo-500 hover:text-indigo-500 hover:bg-white transition-all duration-300 download-btn group shadow-sm" title="Download Source">
+                    <button data-download-url="${product.pdfUrl}" class="flex items-center justify-center w-12 h-12 rounded-2xl border-2 border-slate-200 text-slate-400 ${semColors.hoverBorder} ${semColors.hoverText} hover:bg-white transition-all duration-300 download-btn group shadow-sm" title="Download Source">
                         <svg class="w-5 h-5 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     </button>
                     <!-- View Full Paper -->
-                    <button data-product-id="${product.id}" class="flex-grow bg-white border-2 border-slate-200 hover:border-indigo-600 text-slate-700 hover:text-indigo-600 font-black py-3 px-6 rounded-2xl transition-all duration-300 view-pdf-btn shadow-sm text-sm uppercase tracking-widest">
+                    <button data-product-id="${product.id}" class="flex-grow bg-white border-2 border-slate-200 ${semColors.hoverBorder} text-slate-700 ${semColors.hoverText} font-black py-3 px-6 rounded-2xl transition-all duration-300 view-pdf-btn shadow-sm text-sm uppercase tracking-widest">
                         View Paper
                     </button>
                 </div>
