@@ -1,26 +1,114 @@
-body {
-    font-family: 'Inter', sans-serif;
-    /* UPDATED: Added a subtle gradient background */
-    background-color: #f0f2f5;
-    background-image: linear-gradient(180deg, #e0e7ff 0%, #f0f2f5 25%);
-}
-@media (prefers-reduced-motion: no-preference) {
-    .modal-fade-in {
-        animation: fadeIn 0.3s ease-out;
-    }
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-    outline: 2px solid #4f46e5;
-    outline-offset: 2px;
-}
-/* UPDATED: Styling for the colored top border on cards */
-.card-top-border {
-    border-top: 4px solid #4f46e5;
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary: #ec4899;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --radius: 1.5rem;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    background-image:
+        radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 0.03) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 0.03) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 0.03) 0, transparent 50%);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* Glassmorphism Header */
+header {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Premium Card Labels/Badges */
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Card Entry Animation */
+.animate-card {
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Animation */
+@media (prefers-reduced-motion: no-preference) {
+    .modal-fade-in {
+        animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Card Styles */
+.card-top-border {
+    border-top-width: 10px;
+    border-top-style: solid;
+}
+
+/* Custom Select Styling */
+select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+}
+
+/* Search Bar Glow */
+#searchBar:focus {
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
